@@ -1,8 +1,7 @@
 package pack;
 
-import java.util.Iterator;
 
-public class MyLinkedList<T> implements Iterable<T>{
+public class MyLinkedList<T>{
 
 	private Element<T> value;
 
@@ -30,32 +29,5 @@ public class MyLinkedList<T> implements Iterable<T>{
 		}
 
 		return current.getValue();
-	}
-
-	@Override
-	public Iterator<T> iterator() {
-		
-		
-		Iterator<T> iter = new Iterator<T>() {
-			
-			@Override
-			public boolean hasNext(){
-				return true;
-			}
-
-			@Override
-			public T next() {
-				return value.getValue();
-			}
-
-			@Override
-			public void remove() {
-				
-			}
-			
-		};
-		
-		
-		return iter;
 	}
 }
