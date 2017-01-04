@@ -226,67 +226,9 @@ namespace AVLWindowsFormsApplication
                     if (dotIndex != -1)
                         fileName = fileName.Substring(0, dotIndex);
                     //tree.setRootName(fileName);
-                    tree.fill(info, null);
+                    tree.fill(info, fileName);
                 }
             }   
-        }
-
-        // this method works similar to readToolStripMenuItem_Click(...)
-        // arguments:
-        // path - path to file or directory as a string
-        public void readFromDragAndDropFile(string path)
-        {
-            // true if path : string is a file
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            parserSolutionDir = path.Substring(0, path.LastIndexOf("\\"));
-
-            // create new parser object
-            Parser parser = new Parser();
-
-            // begin Parser.read(...) method
-            // returns list of elements found in "properties.txt" file
-            ElementInfo[] info = parser.read(path);
-
-            // get error messages as array
-            // each message contains information abut an error
-            string[] errMsg = parser.getErrorMessage();
-
-            // if length of errMsg is not zero -> error occurred
-            if (errMsg.Length != 0)
-            {
-                // create and show new ErrorPromptWindow
-                ErrorPromptWindow epw = new ErrorPromptWindow();
-
-                // fill error window with messages
-                epw.setText(errMsg);
-                epw.ShowDialog();
-            }
-            else
-            {
-                // if length of errMsg is zero -> no errors
-                string message = "Done!";
-                string caption = "Reader";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-
-                // show succes message
-                MessageBox.Show(message, caption, buttons);
-
-                // fill tree with data from "properties.txt" file (ElementInfo[])
-                string fileName = path.Substring(path.LastIndexOf("\\") + 1);
-
-                int dotIndex = fileName.LastIndexOf(".");
-
-                if(dotIndex != -1)
-                    fileName = fileName.Substring(0, dotIndex);
-
-                //tree.setRootName(fileName);
-                tree.fill(info, null);
-            }
-           
         }
 
         private string busSourceDir;
@@ -397,12 +339,6 @@ namespace AVLWindowsFormsApplication
                 else
                 {
                     // if length of errMsg is zero -> no errors
-                    string message = "Done!";
-                    string caption = "Reader";
-                    MessageBoxButtons buttons = MessageBoxButtons.OK;
-
-                    // show succes message
-                    MessageBox.Show(message, caption, buttons);
 
                     tree.fill(info, treePath);
                 }
