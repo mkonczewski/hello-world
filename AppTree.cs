@@ -11,6 +11,9 @@ namespace AVLWindowsFormsApplication
         // reference to main application 
         private App appHandle;
 
+        // temporary variable for extendable data
+        private ElementInfo nodeData;
+
         public AppTree()
         {
             // set AllowDrop to true in order to accept dropped data
@@ -26,7 +29,7 @@ namespace AVLWindowsFormsApplication
         // bool type = true, A-Z (ascending order), false Z-A (descending order)
         public void sortTree(bool type)
         {
-            
+            //Sort();
         }
 
         // sets ElementInfo stored in tree
@@ -87,24 +90,62 @@ namespace AVLWindowsFormsApplication
         // clear all data stored in three
         public void clear()
         {
-            
+            Nodes.Clear();
         }
 
         // This method runs when mouse leaves the area of this component
         protected override void OnMouseLeave(EventArgs e)
         {
-            
+            // if variable for extendable data is empty then do nothing
+            // otherwise send this data
+            if (nodeData != null)
+            {
+                // send stored data as string and clear it
+                DoDragDrop(nodeData.ToString(), DragDropEffects.Move);
+                nodeData = null;
+            }
+
         }
 
         // clear nodeData : ElementInfo on mouse up
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            
+            nodeData = null;
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            
+            // do nothing when the tree is empty
+            if (Nodes.Count == 0)
+                return;
+
+            // store parent TreeNode if it exists 
+            TreeNode parent = Nodes[0];
+
+            // for each node in the list of parent nodes 
+            int index = 0;
+            foreach (TreeNode node in parent.Nodes)
+            {
+                // get bounds of current node
+                Rectangle rc = node.Bounds;
+
+                // stop the loop then current node is below e.Y
+                if (rc.Y > e.Y)
+                {
+                    return;
+                }
+
+                // Contains(x, y) returns true when Point(x, y) is inside bounds of this rectandle
+                if (rc.Contains(e.X, e.Y))
+                {
+                    // get current node and assign it to nodeData:ElementInfo
+                    nodeData = info[index];
+                    return;
+                }
+
+                index++;
+            }
+
         }
 
         // DragDropEffects.Move - It represents how moving cursor will look
