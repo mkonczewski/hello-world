@@ -1,0 +1,41 @@
+
+IOLibrary
+	- FileParser.cs	sciezka: ...\data\A20\1167\KA201167009.L2P\ProjectLib.L2L\I_000_Para.L2T\public\CCODE\MBRT\ZBRO32E\ZBRO32ESrc.C
+			sciezka: ...\data\A20\1167\KA201167009.L2P\ProjectLib.L2L\I_101_Grundfahrzeug_36258850002_0009.L2T\public\CCODE\MBRT\ZBRO32E\ZBRO32ESrc.C
+	- FileReader.cs
+	- ConfigReader.cs
+DataLibrary
+	- ElementData.cs
+	- ParamsData.cs
+	- ErrorMessageData.cs 
+	
+	* Kiedy wykonuje parsowanie i mój plik ju,z istnieje tzn juz wczesniej parsowalem 
+	to powinienem usunac wszystko co tam jest poniewaz poze pozostac cos co nie jest dla mnie pozadane
+	
+	* powinienem byc wrazliwy na dane pobierane z zewnarz ale bledy wewntzne wynikaja ze zle napisanego kodu
+	Wiec nie powiniem przesadzac z lapaniem bledów wewnarz dzialajacego kodu a jedynie byc pardziej specyfikowany
+	na dane z plików / od uzytkownika
+	
+	* Jezeli wczytuje parametry lub ElamentData to ich meytody ToString powinny generowac takie same napisy jak te, które
+	dostaja na wejscie z pliku. Ulatwi mi to ewentualne pisanie do pliku.
+
+
+
+sciezka: ...\data\A20\1167\KA201167009.L2P\ProjectLib.L2L\I_000_Para.L2T\public\CCODE\MBRT\ZBRO32E\ZBRO32ESrc.C
+
+Dane:
+
+/* ID: 0
+  G_02_PARA_BusTyp_Anzahl_Achsen:=3
+  */
+  LC_MF_MOVE_ADDRA(USINT,LC_vg_G_02
+
+
+
+sciezka: ...\data\A20\1167\KA201167009.L2P\ProjectLib.L2L\I_101_Grundfahrzeug_36258850002_0009.L2T\public\CCODE\MBRT\ZBRO32E\ZBRO32ESrc.C
+
+Dane:
+
+/* ID: 1
+    EQ(EQ.IN1:=G_13_PARA_Brandmldr_OK_Wert, EQ.IN2:=165)
+    */
