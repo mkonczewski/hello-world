@@ -1,0 +1,41 @@
+Klasa:
+
+DataLibrary.ErrorMessageData
+
+Opis:
+
+Klasa ta reprezentuje wiadomość o błędzie jaki wystąpił w programie. Błąd przedstawiony jest w formie treści opisującej na czym polega błąd oraz opcjonalanego tytułu.
+
+Zmienne:
+
++ Message : string	Pole tylko do odczytu, zawiera treść wiadomości w formie napisu. Dowolny nie pusty (null) tekst.
++ Title : string	Pole tylko do odczytu, zawiera nagłówek wiadomości w formie napisu. Dowolny tekst, może być null.
+
+Konstruktor:
+
++ ErrorMessageData(message : string, title : string)	Inicjuje nowy obiekt przy pomocy przekazanej jako argument treści wiadomości oraz tytułu.
+
++ ErrorMessageData(message : string)	Inicjuje nowy obiekt przy pomocy przekazanej jako argument treści wiadomości oraz tytuł zostaje ustawiony na wartość null.
+
+Metody:
+
++ ToString() : string	Zwraca napis z treścią zmiennych "Message" oraz "Title". Zwracany tekst ma formę: "ErrorMessageData[Title = {this.Title}, Message = {this.Message}]"
+
+- IsMessageValid(message : string) : określa czy treść wiadomości jest poprawna, czy nie jest null
+
+
+Testy:
+
+Testy klasy ErrorMessageData to zestaw testów jednostkowych przeprowadzanych przez klasę DataLibraryTestProject.ErrorMessageDataTest.
+Zadaniemi testów jest sprawdzenie:
+
+1. SingleArgumentConstructorTest 
+	- sprawdzenie czy można ustawić wiadomość przy pomocy konstruktora jednoargumentowego
+2. MultiArgumentConstructorTest 
+	- sprawdzenie czy można ustawić wiadomość przy pomocy konstruktora dwuargumentowego
+3. ToStringWithMessageAndTitleTest 
+	- sprawdzenie metody toString dla ustawionej treści i tytułu wiadomości
+4. ToStringWithOnlyMessageTest 
+	- sprawdzenie metody toString dla ustawionej tylko treści
+5. NullMessageTestSouldThrowException
+	- sprawdzenie czy można ustawić treść wiadomości na pustą - oczekiwany wyjątek

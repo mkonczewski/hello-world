@@ -1,0 +1,46 @@
+Klasa:
+
+DataLibrary.ParamsData
+
+Opis:
+
+Klasa ta reprezentuje informacje o parametrze. Parametry zmiennych znajdują się w plikach xxxx_params.txt, każda linia to jeden parametr. Dane z pliku z parametrami mogą zostać
+wczytane bezpoścrednio jako cała linia a następnie przy pomocy odpowiedzniego konstruktora możemy ustalić odpowiednie wartości zmiennych. Jeżeli dane były błedne to otrzymamy wyjątek.
+Format lini: nazwa_zmiennej;wartość_zmiennej;typ_zmiennej.
+
+Zmienne:
+
++ Name : string	Pole tylko do odczytu z nazwą zmiennej np. "G_02_PARA_BusTyp_AdBlue". Może to być dowolnym napisem, który nie jest null, pusty lub składa się z samych białych znaków.
++ Type : string	Pole tylko do odczytu określające typ zmiennej np. "BOOL". Może to być dowolnym napisem, który nie jest null, pusty lub składa się z samych białych znaków.
++ Value : string	Zawiera tylko do odczytu wartość zmiennej. Wartość ta przedstawiona jest jako napis ze względu na to, że może składać się nie tylko z wartości liczbowej np. "TIME#10ms". Może to być dowolnym napisem, który nie jest null, pusty lub składa się z samych białych znaków.
+- Delimiter : char	Reprezentuje znak jaki oddziela poszczególne wartości 
+
+Konstruktor:
+
++ ParamsData( name : string, type : string, value : string )	Inicjuje nowy obiekt przy pomocy przekazanej jako argument wartości: nazwy, typu i wartości zmiennej.
+
++ ParamsData( line : string ) Inicjuje nowy obiekt przy pomocy wartości uzyskanych na bazie przekazanej jako argument lini tekstu.
+
+Metody:
+
+- GetPropertiesFromString( line : string )	Metoda przy pomocy zmiennej Delimiter rozcina tekst i wypałnia zmienne Name, Type oraz Value. Jeże został podany nieprawidłowy napis metoda może zwracać wyjątki. 
+ArgumentException - jeżeli format linii jest nieprawidłowy
+NullReferenceException - jeżeli podany na wejście napis jest null'em
++ ToString() : string	Zwraca napis reprezentujący ten obiekt. Wynikowy napis jest identyczny do tego jak wygląda linia w pliku z parametrami.
+
+- IsValidVariable( variable : string) : bool - zwraca wartość logiczną określającą czy podany napis jest poprawny.
+
+Testy
+
+Testy klasy składają się ze zbioru testów jednostkowych w klasie DataLibraryTestProject.ParamsDataTest
+
+1. ConstructorTestValuesShouldBeInitialized - sprawdzam czy przy użyciu konstruktora 3-argumentowego zmienne zostanąpoprawnie zainicjowane
+2. ConstructorTestWithSingleLine - sprawdzam czy przy użyciu konstruktora 1-argumentowego zmienne zostanąpoprawnie zainicjowane
+3. ConstructorTestWithEmptyInputLineShouldThrowException - sprawdzam czy przy użyciu konstruktora 1-argumentowego otrzymam wyjątek jeżeli na wejściu podam wartość null
+4. ConstructorTestWithWrongFormatShouldThrowException - sprawdzam czy przy użyciu konstruktora 1-argumentowego otrzymam wyjątek jeżeli na wejściu podam wartość której nie da się podzielić 
+5. ConstructorTestWithWrongLineFormatShouldThrowException - sprawdzam czy przy użyciu konstruktora 1-argumentowego otrzymam wyjątek jeżeli na wejściu podam wartość której nie da się poprawnie podzielić 
+6. ToStringTestShouldReturnParamsValuesAsSingleLineString - sprawdzam działanie metdy ToString
+7. ConstructorTestForNullNameShouldTrowAnException - sprawdzm czy otrzymam wyjątek jeżeli sprubuję ustawić wartość nazwy na null
+8. ConstructorTestForNullTypeShouldTrowAnException - sprawdzm czy otrzymam wyjątek jeżeli sprubuję ustawić wartość typu na null
+9. ConstructorTestForNullValueShouldTrowAnException - sprawdzm czy otrzymam wyjątek jeżeli sprubuję ustawić wartość parametru na null
+10. ConstructorTestForWrongLineFormarShouldTrowAnException - sprawdzam poprawnośćdziałania konstruktora gdy na wejście podan napis w złym formacie.

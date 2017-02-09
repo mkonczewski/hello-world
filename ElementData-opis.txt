@@ -1,0 +1,74 @@
+Klasa:
+
+DataLibrary.ElementData : IComparable
+
+Opis:
+
+Klasa ta reprezentuje informacje o bojedynczym bloku takie jak jego nazwa czy sachnummer. Wartości zmiennych zostają wczytane ze sparsowanych plikach tekstowych i po uzupełnieniu nimi obiektu informacje zostają użyte aby narysować odpowiadni bloczek na ekranie. 
+
+Format danych dla uzupełniania tej klasy:
+
+Name:
+I_101_XXXX
+Sachnummer:
+11.12345-2345
+Version:
+0009
+Input:
+I_02_XXXXXXXX1
+I_02_XXXXXXXX2
+Output:
+GI_02_XXXXXXX1
+Params:
+G_18_PARA_XXXXX1
+G_18_PARA_XXXXX2
+G_18_PARA_XXXXX3
+
+Dane mogą nie zawierać sekcji Input, Output lub Params
+
+Zmienne:
+
+- FullName : string	Zmienna prywatna tylko do odczytu, zwraca napis składający sie z nazwy, numeru rewizji oraz ścieżki do pliku. Dzięki tej zmiennej możliwe jest porównywanie ze sobą obiektów np. w metodach Equals czy CompareTo
+
++ Path : string	Zmienna reprezentuje pełną ścieżke do pliku na dysku, z którego pochodzą dane do tego obiektu. Może to być dowolnym napisem, który nie jest null, pusty lub składa się z samych białych znaków.
+
++ Name : string	Nazwa komponnetu np. "I_337_IBIS_AussenLautspr". Może to być dowolnym napisem, który nie jest null, pusty lub składa się z samych białych znaków.
+
++ Sachnummer : string	sachnummer tego obiektu np. "11.12345-1234". Może to być dowolnym napisem, który nie jest null, pusty lub składa się z samych białych znaków.
+
++ Version : int	Numer tego obiektu np. 6. Może to być dowlna liczba.
+
++ Inputs : string[] Tablica zmiennych / sygnałów wejściowych. Może to być dowolna wartość, włącznie z null. 
+
++ Outputs : string[] Tablica zmiennych / sygnałów wyjściowych. Może to być dowolna wartość, włącznie z null. 
+
++ Params : string[] Tablica parametrów. Może to być dowolna wartość, włącznie z null. 
+
+Konstruktor:
+
++ ElementData() Zwraca nową instancję tego objektu z wartościami domyślnymi.
+
++ ElementData(name : string, sachnummer : string, version : int)	Zwraca nową instancję tego objektu z ustawionymi wartościami dla nazwy, sachnummeru i numeru rewizji. Pozostałe wartościami zostają domyślne.
+
++ ElementData(name : string, sachnummer : string, version : int, inputs : string[], outputs : string[])	Zwraca nową instancję tego objektu z ustawionymi wartościami dla nazwy, sachnummeru i numeru rewizji. Pozostałe wartościami zostają domyślne.
+
++ ElementData(name : string, sachnummer : string, version : int, inputs : string[], outputs : string[], parameters : string[])	Zwraca nową instancję tego objektu z ustawionymi wartościami dla nazwy, sachnummeru i numeru rewizji oraz sygnły wejścia i wyjścia. Pozostałe wartościami zostają domyślne.
+
++ ElementData(name : string, sachnummer : string, version : int, inputs : string[], outputs : string[], parameters : string[])	Zwraca nową instancję tego objektu z ustawionymi wartościami dla nazwy, sachnummeru i numeru rewizji oraz sygnły wejścia, wyjścia i parametry. Pozostałe wartościami zostają domyślne.
+
++ ElementData( filePath : string, name : string, sachnummer : string, version : int, inputs : string[], outputs : string[], parameters : string[])	Zwraca nową instancję tego objektu z ustawionymi wartościami dla ścieżki do pliku, nazwy, sachnummeru i numeru rewizji oraz sygnły wejścia, wyjścia i parametry.
+
+Metody:
+
++ ToString() : string	Zwraca napis reprezentujący dane z tego obiektu. Zwracane dane mają taką samą postać jak dane z parsowanego pliku. Wynikowy napis może nie zawierać sekcji Input, Output lub Params jeżeli zmienne odpowiedzialne za przechowywanie tych parametrów są null'ami lub nie mają żadnych elementów.
+
++ Equals(obj : object) : bool	Zwraca wartość logiczną określająca czy podany na wejście obiekt jest identyczny tzn ma taką samą nazwę, numer rewizji oraz ścieżkę do pliku. Jeżeli jako argument podany został null, lub obiekt który nie jest ElementData lub ma inną wartość zmiennej FullName to zwracany jest false. W innym razie zwracane jest true.
+
++ GetHashCode() : int Zwraca hash code dla tego elementu. Hash code reprezentowany jest przez wartość hasha zmiennej FullName
+
++ CompareTo(obj : object) : int Zwraca liczbę całkowitą określającą czy wartość tego obiektu jest równa, mniejsza czy większa co do wartości obiektu podanego jako argument. Jeżeli przekazay obiekt jest null'em lub nie jest instancją klasy ElementData to zwracany jest wyjątek "ArgumentException". W metodzie porównywane są ze sobą wartość zmiennej FullName
+
+Testy
+
+Testy klasy składają się ze zbioru testów jednostkowych w klasie DataLibraryTestProject.ElementDataTest
+Testy badają zachowanie obiektu podczas inicjalizacji róznymi metodami, Equal, CompareTo (włącznie ze sprawdzeniem wyjątków) oraz testy metody ToString()

@@ -1,0 +1,94 @@
+Klasa:
+
+IOLibrary.ConfigFileReader
+
+Opis:
+
+Testowy opis.
+
+Metody w parserze prwadopodobnie powinny być statyczne
+Metody mogą zwracać listy zamiast tablic ponieważ i task tylko z nich wczytuje 
+i nie ma sensu ich dodatkowo parsować.
+
+w klasie tej czytam plik konfiguracyjny. Plik ten znajduje sięw tej samej lokalizacji co 
+plik wykonywalny exe (ale może go nie byc wcale).
+ścieżka do pliku (powinna być generowana wewntrzymi metodami z klsy file i directory)
+
+Przebieg w programie:
+*uruchamiam programi
+*ładuję dane autobusu
+*(opcionalni - wyciągam jakiś element na plansszę)
+*klikam prawym klawiszem myszki na górnym pasku elementu lub na wężle z którego 
+on pochodzi
+Cały proces wyznaczenia (na etapie czytania zależny jest tylko od ElementData)
+np klikam na elementcie, którego nazwa to I_118_Can_Schalter_1 oraz SN (sachnummmer)
+36.25885-0010
+wyznaczam w jakim pliku się znajdzie (typ pliku wycięty z SN tego elementu)
+przechodzę do pliku konfiguracyjnego: \config\SN\robo\25885-.txt
+otwieram ten plik
+wczytuję go linia po linia
+jeżeli linia składa się wyłącznie z mojego SN to znaczy, że znalazłem
+sekcję w której mam dane do tego elementu
+pierwsza linia powinna zawierać opis
+każda kolejna powinna zawierać dane 
+	wczytuje pierwszą cześć danych - razem ze znakiem C np "33.#3F60-0832 C"
+	ta część zostanie dodana do menu
+	(mogę zrobić tak, że zwracam tylko dane z tej sekcji jako całe linei 
+	a obrabiam je póżniej)
+jeżeli natrafię na następny sn to znaczy że skończyłem 
+
+Jeżeli nie znalazłem takiego SN lub nie mam pliku konfiguracyjnego 
+	to znaczy, że po kliknięciu menu nie zostanie wyświetlone 
+
+W kolejnej części geeruję podmenu
+Aby to zrobićnajpierw musze wyznaczyć nazwę pliku, w którym będe szuakła
+czli ze wcztanej nazwy np. "33.#3F60-0832 C" wycinam "3F60"
+na podstawie tej nazwy generuję ścieżkę w postacie 
+\config\VKG\robo\3F60-.txt
+otwieram ten plik jeśli istnieje (jeśli nie to menu pozostanie bez bocznego podokienka)
+czytam go linia po lini
+jeżeli znajdzę nazwę którą wyznaczyłem we wcześniejszym pliku (nie sprawdzam tu czy ma 'C')
+np "33.#3F60-0832 C"-> szykam 33.#3F60-0832
+jeżeli trafię to zaczynam czytać i konczę gdy konczę plik lub
+	trafię na następny napis określający nową sekcję (uwaga następna żecz, którą wczutuję może znajdować
+	się bezpośrednio podspoedm)
+	
+	wczytuje tylko lnie, które posują do wzoraca 
+	36.25402-7825 ZSB KABELSTRANG  MASSE AUFBA   
+	i zwracam je
+
+
+
+
+Format danych dla tej klasy:
+
+Name:
+I_101_XXXX
+Sachnummer:
+11.12345-2345
+Version:
+0009
+Input:
+I_02_XXXXXXXX1
+I_02_XXXXXXXX2
+Output:
+GI_02_XXXXXXX1
+Params:
+G_18_PARA_XXXXX1
+G_18_PARA_XXXXX2
+G_18_PARA_XXXXX3
+
+Zmienne:
+
+
+
+Konstruktor:
+
+
+
+Metody:
+
+
+
+Testy
+
